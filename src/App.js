@@ -1,13 +1,17 @@
-//Mportações de pacotes
+import React from 'react'
+import { ThemeProvider } from '@material-ui/core/styles'
+
+//Importação do tema
+import theme from './Theme'
 
 //Importações de componentes
 import Home from './Pages/Home'
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Home />
-    </div>
+    </ThemeProvider>
   )
 }
 
