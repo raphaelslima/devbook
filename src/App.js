@@ -8,6 +8,7 @@ import theme from './Theme'
 //Importações de componentes
 import Home from './Pages/Home'
 import Login from './Pages/Signin'
+import GuestRoute from './routes/GuestRoute'
 
 import './mock'
 
@@ -17,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
+          <GuestRoute exact path="/login" element={<Login />} />
           <Route path="*" element={<h1>Not Found 404</h1>} />
         </Routes>
       </BrowserRouter>

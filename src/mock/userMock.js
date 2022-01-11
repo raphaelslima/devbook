@@ -11,7 +11,7 @@ mock.onPost('/api/home/login').reply(config => {
     avatar: '/images/avatars/avatar_1.jpeg'
   }
 
-  if (email !== user.email || password !== 'admin') {
+  if (email !== 'raphaeldesousalm@gmail.com' || password !== 'admin') {
     return [400, 'Usuário ou senha incorretos']
   }
 

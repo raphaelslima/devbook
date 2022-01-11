@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // Importação makeStyles
 import { makeStyles } from '@material-ui/core/styles'
@@ -12,9 +13,13 @@ import { LockOutlined } from '@material-ui/icons'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import { Link } from '@material-ui/core'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 // Importação axios
 import axios from '../../utils/axios'
+
+//authService
+//import authService from '../../services/authServices'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,21 +45,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
 
-  left: {
-    backgroundColor: 'red',
-    flexBasis: '58%',
-
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  right: {
-    backgroundColor: 'blue',
-    flexBasis: '42%'
-  },
-
   boxForm: {
     display: 'flex',
     flexDirection: 'column',
@@ -76,17 +66,26 @@ const useStyles = makeStyles(theme => ({
 
 function SingIn() {
   const classes = useStyles()
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState()
 
   async function handleSignIn(e) {
     e.preventDefault()
 
     try {
+      // await authService.singIn('raphaeldesousalm@gmail.com', 'admin')
+
       await axios.post('/api/home/login', {
-        email: 'raphaeldesousalm@gmail.com',
-        password: 'admin'
+        email: email,
+        password: password
       })
+
+      navigate('/')
     } catch (error) {
-      console.log(error.response)
+      //setErrorMessage(error.response.data.message)
+      setErrorMessage('Email ou senha estão incorretos')
     }
   }
 
@@ -135,6 +134,8 @@ function SingIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -146,6 +147,8 @@ function SingIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <Button
               fullWidth
@@ -157,6 +160,12 @@ function SingIn() {
             >
               Entrar
             </Button>
+
+            {errorMessage && (
+              <FormHelperText className="textError" error>
+                {errorMessage}
+              </FormHelperText>
+            )}
 
             <Grid container className={classes.links}>
               <Grid item>
