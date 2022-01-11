@@ -54,14 +54,6 @@ function Header() {
           </SvgIcon>
           <Avatar alt="Raphael Lima" src="/" />
         </div>
-        {/*
-          <span>Devbook</span>
-        <div>
-          
-          <span>Img 1</span>
-          <span>Img 2</span>
-        </div>
-          */}
       </Toolbar>
     </AppBar>
   )
